@@ -1,0 +1,58 @@
+
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        /**
+         * 链接：https://www.nowcoder.com/questionTerminal/46e837a4ea9144f5ad2021658cb54c4d
+         来源：牛客网
+
+         找到难度不大于能力的所有工作里，报酬最多的。核心是用HashMap来记录难度和不超过该难度的最大报酬。
+         先把工作的难度和报酬映射到HashMap
+         把人的能力也全部读进来，放到HashMap，报酬可以先设为0.
+         最后按难度从小到大（所以需要先排序）更新HashMap,key为难度，value为不超过难度的最大报酬。
+         */
+
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();//工资数量/伙伴数量
+        int m  = sc.nextInt();
+
+        int t1 = 0,t2 = 0;
+        HashMap<Integer,Integer> hs = new HashMap<>();
+
+        int []a = new int[n+m];
+        int []b = new int[m];
+
+        for(int i=0;i<n;i++){  //工作的数量n
+            t1 = sc.nextInt(); //存开始难度和工资/
+            t2 = sc.nextInt();
+            a[i]=t1; //存难度
+            hs.put(t1,t2);//HashMap来记录难度和该难度的报酬
+        }
+
+        for(int i=0;i<m;i++){
+            t1 = sc.nextInt();
+            a[n+i] = t1; //存储难度
+            b[i]=t1; //存最后的难度
+            if(!hs.containsKey(t1)){
+                hs.put(t1,0);//无相同难度的工作追加数据
+            }
+        }
+
+        Arrays.sort(a); //将难度值排序
+        int max = 0;
+        for(int i=0;i<m+n;i++){
+            max = Math.max(max,hs.get(a[i])); //根据难度找出最大的工资
+            hs.put(a[i],max);//更新难度对应的最大工资
+        }
+
+        for(int i=0;i<m;i++){
+            System.out.println(hs.get(b[i]));
+        }
+
+    }
+}
