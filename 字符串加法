@@ -1,0 +1,38 @@
+ 
+输入两个字符串a和b，字符串内容为二进制数字，求两个字符串相加的结果，加法计算方法以二进制方式计算，
+并返回对应的字符串结果。要求程序尽可能的高效。示例如下：
+
+/**  
+
+* @param a = "1101"  
+
+* @param b = "1100"  
+
+* @return "11001"  
+
+*/ 
+
+public String add(String a, String b){
+}
+
+
+
+ 
+ import java.util.Scanner;
+public class Main{
+    
+  //链接：https://www.nowcoder.com/questionTerminal/829ae8987a424bd6b9a95a240ebdb0e3
+//来源：牛客网
+
+ public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        String a = cin.next();
+        String b = cin.next();
+        System.out.println(add(a,b));
+    }
+    public static String add(String a,String b) {
+        int num = Integer.valueOf(a,2)+Integer.valueOf(b,2);
+        return Integer.toBinaryString(num).toString();
+    }
+    
+}
