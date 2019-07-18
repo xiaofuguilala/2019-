@@ -1,0 +1,49 @@
+利用插入算法进行排序
+//https://www.cnblogs.com/wanglingdeboke/p/9484355.html
+
+//插入操作
+​
+​/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        
+        if(head ==null || head.next == null) return head;
+        //有序部分
+       ListNode preHead = new ListNode(0);
+        preHead.next = head;
+       //无序部分
+        ListNode dealNode = head;
+        ListNode temp ;
+        ListNode r;
+        while(dealNode!=null && dealNode.next!=null){
+            //找到无序中的一个值，与有序中的数进行比较，进行插入
+            if(dealNode.val <= dealNode.next.val){
+                dealNode = dealNode.next;
+            }else{
+​//下面两步代码是从无序链表中删掉小的节点
+                temp = dealNode.next;
+                dealNode.next = temp.next;
+                r = preHead;
+​//找到比无序链表中的值大的地方
+                while(r.next.val <= temp.val ){
+                    r = r.next;
+                }
+​//进行插入操作
+                temp.next = r.next;
+                r.next = temp;
+            }
+        }
+        
+        return preHead.next;
+    }
+}
