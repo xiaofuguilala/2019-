@@ -9,7 +9,7 @@ Return the starting gas station's index if you can travel around the circuit onc
 Note: 
 The solution is guaranteed to be unique.
 
-有N个节点，每个节点的油量为gas[i],一个加油站到另一个加油站需要油量cost[i].
+有N个节点，每个节点的油量为gas[i],一个加油站到另一个加油站需要油量cost[i].现在需要找出从哪一个点出发能够以足够的汽油量走一圈
 
  public int canCompleteCircuit(int[] gas, int[] cost) {
         //从start出发， 如果油量足够， 可以一直向后走 end++；  油量不够的时候，
