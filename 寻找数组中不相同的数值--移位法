@@ -1,0 +1,42 @@
+
+Given an array of integers, every element appears twice except for one. Find that single one.
+
+Note: 
+Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+ public int singleNumber(int[] A) {
+        //遍历数组，记录每个数字出现的次数，可以以数字为下标然后进行赋值
+       int ones = 0;
+        for(int i=0;i<A.length;i++){
+            ones^=A[i];
+        }
+        
+        return ones;
+    }
+    
+    
+    
+    hashSet的方法
+    
+     public int singleNumber(int[] A) {
+        //遍历数组，记录每个数字出现的次数，可以以数字为下标然后进行赋值
+        if(A.length<0) return 0;
+        Set<Integer> map = new HashSet<>();
+        int count = 0;
+
+        for(int i=0;i<A.length;i++){
+//            int temp = A[i];
+//            map.put(temp,count++);
+            if(map.contains(A[i])){
+                map.remove(A[i]);
+            }else {
+                map.add(A[i]);
+            }
+        }
+
+        Iterator<Integer> it = map.iterator();
+        while (it.hasNext()) {
+            return  it.next();
+        }
+        return 0;
+    }
