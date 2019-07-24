@@ -1,0 +1,44 @@
+//题意：N个孩子站成一排，每个孩子分配一个分值。给这些孩子派发糖果，满足如下要求：
+        //每个孩子至少一个
+        //分值更高的孩子比他的相邻位的孩子获得更多的糖果
+        //求至少分发多少糖果？
+
+
+ public int candy(int[] ratings) {
+        
+        //链接：https://www.nowcoder.com/questionTerminal/74a62e876ec341de8ab5c8662e866aef
+//来源：牛客网
+
+ //题意：N个孩子站成一排，每个孩子分配一个分值。给这些孩子派发糖果，满足如下要求：
+        //每个孩子至少一个
+        //分值更高的孩子比他的相邻位的孩子获得更多的糖果
+        //求至少分发多少糖果？
+        
+        if(ratings.length<=0) return 0;
+        if(ratings.length==1) return 1;
+        int len = ratings.length;
+        int sum = 0;
+        //初始化时每个孩子的糖果数为1
+        int[] candyNum = new int[len];
+        for(int i=0;i<len;i++){
+            candyNum[i] = 1;//初始化时每个孩子的糖果值为1
+        } 
+        //从左到右，前面分数大的糖果数更多 70 80 40
+        for(int i=1;i<len;i++){
+            if(ratings[i]>ratings[i-1]){ //80>70
+                candyNum[i] = candyNum[i-1]+1;
+            }
+        }
+        //从右到左，保证后一个分数大于前一个分数的糖果数更多
+        for(int i=len-2;i>=0;i--){ //右到左 80 > 40
+            if(ratings[i]>ratings[i+1] && candyNum[i]<=candyNum[i+1]){
+                candyNum[i] = candyNum[i+1]+1;
+            }
+        }
+        
+        for(int i=0;i<len;i++){
+           sum += candyNum[i];
+        }
+        
+        return sum;
+    }
