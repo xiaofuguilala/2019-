@@ -1,0 +1,63 @@
+
+
+
+ /**
+
+    给定一个单链表，反转该链表的后一半。 如果链表中元素个数为奇数，则中间元素会成为反转的一部分；如果为偶数，中间元素不成为反转的一部分。中间的元素是第(N+1)/2个元素，N是总元素的个数。
+    示例：
+    输入：2 3 6 1 4 8 9 7
+    输出：2 3 6 1 7 9 8 4
+    **/
+    public  ListNode reverseNode(ListNode head){
+
+        //找到中间元素
+        int num = 1;
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast!=null && fast.next.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+            num ++;
+        }
+        ListNode middle = slow;
+        while (slow.next!=null){
+            slow = slow.next;
+            num++;
+        }
+        slow = head;
+        if(num %2==0){
+            ListNode startNode = middle.next;
+            middle.next = null;
+            //进行反转操作
+            ListNode pre  = startNode;
+            //pre.next = null;
+            ListNode cur = startNode.next;
+            pre.next = null;
+            while (cur!=null){
+                ListNode temp = cur.next;
+               cur.next = pre;
+               pre = cur;
+                cur = temp;
+            }
+            //连接
+            middle.next = pre;
+        }else {
+            //连带中间节点进行反转
+            ListNode startNode = middle;
+            //middle
+            middle.next = null;
+            //进行反转操作
+            ListNode pre  = startNode;
+            pre.next = null;
+            ListNode cur = startNode.next;
+            while (cur!=null){
+                ListNode temp = cur.next;
+                cur.next = pre;
+                pre = cur;
+                cur = temp;
+            }
+            middle.next = pre;
+        }
+        return  head;
+    }
