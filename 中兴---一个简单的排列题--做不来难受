@@ -1,0 +1,41 @@
+ * 给定一个整数n,以下方式打印n行。如果n=5,则列阵为：(Java/C/C++)
+     1  1
+     3*2  2  3=1+2
+     4*5*6   3层  3+3=6
+     10*9*8*7  4层  6+4=10
+     11*12*13*14*15   5层 10+5=15
+
+
+ public  void print(int n){
+
+        //奇数层从小到大++  偶数层 从大到小--  奇数层每一层的开始为前面的值加上层数开始 偶数层为前面值加1
+        int num = 0;
+        int level = 1;
+        for(int i=1;i<=n;i++){
+            StringBuffer sb = new StringBuffer();
+            level = i;//每层
+            if(i%2==1){
+                //奇数层
+                for(int j=0;j<level;j++){
+                    if(j==level-1){
+                        sb.append(String.valueOf(++num));
+                    }else {
+                        sb.append(String.valueOf(++num)+"*");
+                    }
+                }
+            }else {
+                //偶数层
+                int temp = num+level;
+                num = temp; //偶数层第一个数
+                for(int j=0;j<level;j++){
+                    if(j==level-1){
+                        sb.append(String.valueOf(temp--));
+                    }else {
+                        sb.append(String.valueOf(temp--)+"*");
+                    }
+                }
+
+            }
+            System.out.println(sb.toString());
+        }
+    }
